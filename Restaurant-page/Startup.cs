@@ -26,6 +26,7 @@ namespace Restaurant_page
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseMvc();
             
 

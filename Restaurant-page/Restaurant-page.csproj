@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\style.css" />
+    <None Include="wwwroot\CSS\style.css" />
   </ItemGroup>
 
 </Project>
