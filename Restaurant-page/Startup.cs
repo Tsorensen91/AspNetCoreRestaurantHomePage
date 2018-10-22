@@ -25,9 +25,13 @@ namespace Restaurant_page
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
+
+            app.Run((context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                throw new Exception("Error 404: file not found");
             });
         }
     }
