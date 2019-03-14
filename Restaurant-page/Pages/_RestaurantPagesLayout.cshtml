@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,6 +10,15 @@
 </head>
 <body>
     <div>
+        <nav>
+            <ul>
+                <li><a asp-page="/Index">Home</a></li>
+                <li>Menu</li>
+                <li>Contact</li>
+                <li><a asp-page="#">Login</a></li>
+                <li><a asp-page="/Account/RegisterGuest">Register</a></li>
+            </ul>
+        </nav>
         @RenderBody()
     </div>
 </body>

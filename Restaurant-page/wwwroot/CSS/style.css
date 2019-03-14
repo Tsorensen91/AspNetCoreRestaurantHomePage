@@ -4,43 +4,57 @@ body {
 
 .wrapper {
   width: 1000px;
-  margin: 50px 100px;
+  margin: 0px auto;
   background-color: #333;
-  padding: 100px;
-  height: 2000px;
+  padding: 40px;
+  height: 1000px;
 }
 
 header {
   background-color: #666;
   width: 1000px;
   height: 100px;
+  margin-bottom: 30px;
 }
 
 header h1 {
-  margin-left: 20px;
-  float: left;
+  margin: 0px auto;
   text-align: center;
   color: white;
+  line-height: 100px;
 }
 
-nav{
-  float: right;
-  margin-right: 20px;
-  text-align: center;
-  color: white;
-  margin-top: 30px;
+nav {
+    margin: 0px auto;
+    text-align: center;
+    color: white;
 }
 
 nav li {
-  float: left;
   margin: 0px 20px;
 }
 
 h1 {
   color: white;
   text-align: center;
-  margin: 40px 0px;
+  margin: 20px 0px;
 
+}
+
+p {
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+
+form {
+    color: white;
+    text-align: center;
 }
 
 .main-article {
@@ -64,8 +78,3 @@ h1 {
   text-align: center;
 }
 
-main h2 {
-  background-color: #666;
-  color: white;
-  text-align: center;
-}
