@@ -1,0 +1,52 @@
+﻿@page
+@model Restaurant_page.Pages.MenuModel
+@{
+    ViewData["Title"] = "Menu";
+    Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Menu</h2>
+
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var menuItem in Model.MenuItems)
+            {
+            <tr>
+                <td><img src="@Url.Content(menuItem.Image)" alt="@menuItem.Image" /></td>
+                <td>@menuItem.Name</td>
+                <td>@menuItem.Description</td>
+                <td>@menuItem.Price.ToString("C")</td>
+                <td>
+                    <button type="submit" asp-page-handler="Buy"asp-route-id="@menuItem.MenuID">Buy</button>
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                <td>
+                    <a asp-page="/EditMenuItem" asp-route-id="@menuItem.MenuID">Edit</a>
+                </td>
+                <td>
+                    <button type="submit" asp-page-handler="Delete" asp-route-id="@menuItem.MenuID">
+                        Delete
+                    </button>
+                </td>
+                }
+            </tr>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+            <tr><td><a asp-page="/AddMenuItem">Add Menu Item</a></td></tr>
+            }
+        </tbody>
+
+    </table>
+</form>

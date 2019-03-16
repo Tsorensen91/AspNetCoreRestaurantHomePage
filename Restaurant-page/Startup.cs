@@ -19,25 +19,32 @@ namespace Restaurant_page
         {
             Configuration = configuration;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Account/Login");
+                options.AccessDeniedPath = new PathString("/Account/NoAccess");
+                options.LogoutPath = new PathString("/index");
+            });
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            CreateRoles(serviceProvider).Wait();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc();
             
 
@@ -46,5 +53,31 @@ namespace Restaurant_page
                 throw new Exception("Error 404: file not found");
             });
         }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.
+                GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.
+                GetRequiredService<UserManager<ApplicationUser>>();
+
+            string[] roleNames = { "Admin", "Member" };
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    var roleResult = await RoleManager.
+                        CreateAsync(new IdentityRole(roleName));
+                }
+            }
+            var _user = await UserManager.FindByEmailAsync("admin@chester.ac.uk");
+            if (_user != null)
+            {
+                await UserManager.AddToRoleAsync(_user, "Admin");
+            }
+        }
+
     }
 }

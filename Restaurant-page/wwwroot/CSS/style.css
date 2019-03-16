@@ -1,5 +1,5 @@
 body {
-  background-color: #404086;
+    background-color: #E6E6FA;
 }
 
 .wrapper {
@@ -27,7 +27,7 @@ header h1 {
 nav {
     margin: 0px auto;
     text-align: center;
-    color: white;
+
 }
 
 nav li {
@@ -35,25 +35,24 @@ nav li {
 }
 
 h1 {
-  color: white;
+
   text-align: center;
   margin: 20px 0px;
 
 }
 
 p {
-    color: white;
+
     text-align: center;
 }
 
 h2 {
-    color: white;
+
     text-align: center;
 }
 
 
 form {
-    color: white;
     text-align: center;
 }
 

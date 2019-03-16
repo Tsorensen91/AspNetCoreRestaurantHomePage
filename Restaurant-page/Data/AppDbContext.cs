@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Restaurant_page.Data;
 
 namespace Restaurant_page
 {
@@ -13,11 +14,15 @@ namespace Restaurant_page
         {
         }
 
-        public DbSet<Guest> Guests { get; set; }
+        public DbSet<CheckoutCustomer> CheckoutCustomers { get; set; }
+        public DbSet<CheckoutBasket> Baskets { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<CheckoutBasketItem> BasketItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<CheckoutBasketItem>().HasKey(t => new { t.MenuID, t.BasketID });
         }
 
     }

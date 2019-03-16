@@ -1,0 +1,37 @@
+﻿@page "{id:int}"
+@model Restaurant_page.Pages.EditMenuItemModel
+@{
+    ViewData["Title"] = "EditMenuItem";
+    Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Edit Menu Item</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label>Name:</label>
+        <div>
+            <input asp-for="MenuItem.Name" />
+        </div>
+        <label>Description:</label>
+        <div>
+            <input asp-for="MenuItem.Description" />
+        </div>
+        <label>Price:</label>
+        <div>
+            <input asp-for="MenuItem.Price" />
+        </div>
+        <label>Image:</label>
+        <div>
+            <input type="file" name="ItemImage" />
+        </div>
+        <div>
+            <input asp-for="MenuItem.MenuID" type="hidden" />
+        </div>
+    </div>
+    <div>
+        <button type="submit" asp-page-handler="Save">Save</button>
+    </div>
+</form>
+

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Guest.cs" />
     <Compile Remove="Migrations\20190314150235_initialCreate.cs" />
     <Compile Remove="Migrations\20190314150235_initialCreate.Designer.cs" />
   </ItemGroup>
@@ -15,11 +16,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\CSS\style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\mailChecker\" />
   </ItemGroup>
 
 </Project>

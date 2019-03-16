@@ -12,6 +12,5 @@ namespace Restaurant_page
         public int ID { get; set; }
         [Required, StringLength(10)]
         public string Name { get; set; }
-        
     }
 }
