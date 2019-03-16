@@ -18,7 +18,7 @@
         <nav>
             <ul>
                 <li><a asp-page="/Index">Home</a></li>
-                <li><a asp-page="/Menu">Menu</a></li>
+                <li><a asp-page="/OrderMenu">Menu</a></li>
                 <li><a asp-page="/Contact">Contact Us</a></li>
                 @if (SignInManager.IsSignedIn(User) == false)
                 {
@@ -33,7 +33,9 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <p>Logged in as Admin</p>
-                    <p><a asp-page="/Menu">Edit Menu</a></p>
+                    <p><a asp-page="/OrderMenu">Edit Menu</a></p>
+                    <p><a asp-page="/AddMenuItem">Add Item to Menu</a></p>
+
                 }
                 <form asp-controller="Account" asp-action="Logout" method="post">
                     <button type="submit">Log out</button>

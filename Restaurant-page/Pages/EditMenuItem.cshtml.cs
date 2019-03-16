@@ -65,7 +65,7 @@ namespace Restaurant_page.Pages
             {
                 throw new Exception($"MenuItem {MenuItem.MenuID} not found!", e);
             }
-            return RedirectToPage("./Menu");
+            return RedirectToPage("./OrderMenu");
         }
     }
 }

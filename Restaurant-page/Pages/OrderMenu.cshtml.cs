@@ -10,23 +10,21 @@ using Restaurant_page.Data;
 
 namespace Restaurant_page.Pages
 {
-    public class MenuModel : PageModel
+    public class OrderMenuModel : PageModel
     {
-
-        public IList<MenuItem> MenuItems { get; private set; }
-
         private readonly AppDbContext _db;
         private readonly UserManager<ApplicationUser> _UserManager;
+        public IList<MenuItem> MenuItems { get; private set; }
 
-        public MenuModel (AppDbContext db, UserManager<ApplicationUser> UserManager)
+        public OrderMenuModel(AppDbContext db, UserManager<ApplicationUser> UserManager)
         {
             _db = db;
             _UserManager = UserManager;
         }
 
-        public void OnGet(int id)
+        public void OnGet()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT * FROM MenuItems WHERE MenuID = {0}", id).ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT * FROM MenuItems").ToList();
         }
 
         public async Task<IActionResult> OnPostBuyAsync(int id)
@@ -60,7 +58,27 @@ namespace Restaurant_page.Pages
                     throw new Exception($"Basket not found!", e);
                 }
             }
-            return RedirectToPage("/OrderMenu");
+            return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            var itemToDelete = await _db.MenuItems.FindAsync(id);
+            if (itemToDelete != null)
+            {
+                //a check to see if item currently in any baskets and if so delete the item in those baskets.
+                var basketItems = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE MenuID = {0}", id).ToList();
+                foreach(var item in basketItems)
+                {
+                    _db.BasketItems.Remove(item);
+                }
+
+                _db.MenuItems.Remove(itemToDelete);
+                await _db.SaveChangesAsync();
+            }
+            return RedirectToPage();
+        }
+
     }
+
 }
