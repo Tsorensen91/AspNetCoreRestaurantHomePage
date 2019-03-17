@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
+using Restaurant_page.Data;
 
 namespace Restaurant_page
 {
@@ -34,6 +36,8 @@ namespace Restaurant_page
                 options.LogoutPath = new PathString("/index");
             });
 
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
@@ -42,6 +46,8 @@ namespace Restaurant_page
             {
                 app.UseDeveloperExceptionPage();
             }
+            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
+
             CreateRoles(serviceProvider).Wait();
             app.UseStaticFiles();
             app.UseAuthentication();

@@ -5,6 +5,10 @@
     Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Identity
+@using Restaurant_page
+@inject SignInManager<ApplicationUser> SignInManager
+
 
 <h2>Menu</h2>
 
@@ -21,29 +25,37 @@
         <tbody>
             @foreach (var menuItem in Model.MenuItems)
             {
-            <tr>
-                <td><img src="@Url.Content(menuItem.Image)" alt="@menuItem.Image" /></td>
-                <td><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></td>
-                <td>@menuItem.Price.ToString("C")</td>
-                <td>
-                    <button type="submit" asp-page-handler="Buy" asp-route-id="@menuItem.MenuID">Add to Cart</button>
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                <td>
-                    <a asp-page="/EditMenuItem" asp-route-id="@menuItem.MenuID">Edit</a>
-                </td>
-                <td>
-                    <button type="submit" asp-page-handler="Delete" asp-route-id="@menuItem.MenuID">
-                        Delete
-                    </button>
-                </td>
-                }
-            </tr>
+                <tr>
+                    <td><img src="@Url.Content(menuItem.Image)" alt="@menuItem.Image" /></td>
+                    <td><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></td>
+                    <td>@menuItem.Price.ToString("C")</td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <td>
+                            <button type="submit" asp-page-handler="Buy" asp-route-id="@menuItem.MenuID">Add to Cart</button>
+                        </td>
+                    }
+                    @if (SignInManager.IsSignedIn(User) == false)
+                    {
+                        <td><p>Please sign in to add Items to basket.</p></td>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a asp-page="/EditMenuItem" asp-route-id="@menuItem.MenuID">Edit</a>
+                        </td>
+                        <td>
+                            <button type="submit" asp-page-handler="Delete" asp-route-id="@menuItem.MenuID">
+                                Delete
+                            </button>
+                        </td>
+                    }
+                </tr>
             }
             @if (User.IsInRole("Admin"))
             {
-            <tr><td><a asp-page="/AddMenuItem">Add Menu Item</a></td></tr>
+                <tr><td><a asp-page="/AddMenuItem">Add Menu Item</a></td></tr>
             }
         </tbody>
 

@@ -13,6 +13,7 @@ namespace Restaurant_page.Pages
     public class OrderMenuModel : PageModel
     {
         private readonly AppDbContext _db;
+
         private readonly UserManager<ApplicationUser> _UserManager;
         public IList<MenuItem> MenuItems { get; private set; }
 

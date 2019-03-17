@@ -5,6 +5,9 @@
     Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Restaurant_page.Data
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
 
 <h2>Checkout</h2>
 <form method="post">
@@ -28,7 +31,18 @@
             }
         </tbody>
     </table>
-    <button type="submit" asp-page-handler="Buy">Buy</button>
+    <div> Price Total = @Model.OrderTotal.ToString("C")</div>
 </form>
+<form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST">
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@Stripe.Value.PublishableKey"
+            data-locale="auto"
+            data-description="J41564 Food Order Charge"
+            data-amount="@Model.AmountToPay"
+            data-currency="GBP">
+    </script>
+</form>
+
 
 
