@@ -65,7 +65,7 @@ namespace Restaurant_page.Pages.Account
                     NewCustomer(Input.RegisterEmail);
                     await _db.SaveChangesAsync();
 
-                    return LocalRedirect("/Index");
+                    return RedirectToPage("/Index");
                 }
                 foreach (var error in result.Errors)
                 {

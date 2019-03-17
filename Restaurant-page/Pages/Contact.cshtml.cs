@@ -31,7 +31,7 @@ namespace Restaurant_page.Pages
                 await smtp.SendMailAsync(message);
             }
 
-            return RedirectToPage("/index");
+            return RedirectToPage("/Index");
         }
 
             public void OnGet()
