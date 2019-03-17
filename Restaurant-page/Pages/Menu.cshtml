@@ -30,9 +30,7 @@
                     <td>@menuItem.Name</td>
                     <td>@menuItem.Description</td>
                     <td>@menuItem.Price.ToString("C")</td>
-                    <td>
-                        <button type="submit" asp-page-handler="Buy" asp-route-id="@menuItem.MenuID">Add to Cart</button>
-                    </td>
+                    
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <td>

@@ -7,45 +7,44 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <h2>Login</h2>
 
-<form method="post">
-    <h4>Use a local account to log in.</h4>
+<div class="login">
+    <form method="post">
+        <h2>Use a local account to log in.</h2>
+        <div asp-validation-summary="All"></div>
+        <div>
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" />
+            <span asp-validation-for="Input.Email"></span>
+        </div>
+        <div>
+            <label asp-for="Input.LoginPassword"></label>
+            <input asp-for="Input.LoginPassword" />
+            <span asp-validation-for="Input.LoginPassword"></span>
+        </div>
+        
+            <button type="submit" asp-page-handler="Login" class="loginbutton">Log in</button>
+        
 
-    <div asp-validation-summary="All"></div>
-    <div>
-        <label asp-for="Input.Email"></label>
-        <input asp-for="Input.Email" />
-        <span asp-validation-for="Input.Email"></span>
-    </div>
-    <div>
-        <label asp-for="Input.LoginPassword"></label>
-        <input asp-for="Input.LoginPassword" />
-        <span asp-validation-for="Input.LoginPassword"></span>
-    </div>
-    <div>
-        <button type="submit" asp-page-handler="Login">Log in</button>
-    </div>
+        <h2>Not a Member? Register:</h2>
 
-    <hr />
-
-    <h2>Not a Member? Register:</h2>
-
-    <div asp-validation-summary="All"></div>
-    <div>
-        <label asp-for="Input.RegisterEmail"></label>
-        <input asp-for="Input.RegisterEmail" class="form-control" />
-        <span asp-validation-for="Input.RegisterEmail"></span>
-    </div>
-    <div>
-        <label asp-for="Input.RegisterPassword"></label>
-        <input asp-for="Input.RegisterPassword" class="form-control" />
-        <span asp-validation-for="Input.RegisterPassword"></span>
-    </div>
-    <div>
-        <label asp-for="Input.ConfirmregisterPassword"></label>
-        <input asp-for="Input.ConfirmregisterPassword" />
-        <span asp-validation-for="Input.ConfirmregisterPassword"></span>
-    </div>
-    <button type="submit" asp-page-handler="Register">Register</button>
-</form>
+        <div asp-validation-summary="All"></div>
+        <div>
+            <label asp-for="Input.RegisterEmail"></label>
+            <input asp-for="Input.RegisterEmail" class="form-control" />
+            <span asp-validation-for="Input.RegisterEmail"></span>
+        </div>
+        <div>
+            <label asp-for="Input.RegisterPassword"></label>
+            <input asp-for="Input.RegisterPassword" class="form-control" />
+            <span asp-validation-for="Input.RegisterPassword"></span>
+        </div>
+        <div>
+            <label asp-for="Input.ConfirmregisterPassword"></label>
+            <input asp-for="Input.ConfirmregisterPassword" />
+            <span asp-validation-for="Input.ConfirmregisterPassword"></span>
+        </div>
+        <button type="submit" asp-page-handler="Register" class="loginbutton">Register</button>
+    </form>
+</div>
 
 

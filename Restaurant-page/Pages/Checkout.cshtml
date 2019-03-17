@@ -10,39 +10,47 @@
 @inject IOptions<StripeSettings> Stripe
 
 <h2>Checkout</h2>
-<form method="post">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+<div class="checkout">
+    <form method="post">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Price.ToString("C")</td>
-                    <td><input type="number" step="1" value=@item.Quantity></td>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <div> Price Total = @Model.OrderTotal.ToString("C")</div>
-</form>
-<form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST">
-    <script src="//checkout.stripe.com/v2/checkout.js"
-            class="stripe-button"
-            data-key="@Stripe.Value.PublishableKey"
-            data-locale="auto"
-            data-description="J41564 Food Order Charge"
-            data-amount="@Model.AmountToPay"
-            data-currency="GBP">
-    </script>
-</form>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            <button type="submit" asp-page-handler="Add" asp-route-id="@item.MenuID">Add Another</button>
+                        </td>
+                        <td>
+                            <button type="submit" asp-page-handler="Subtract" asp-route-id="@item.MenuID">Remove One</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div> Price Total = @Model.OrderTotal.ToString("C")</div>
+    </form>
+    <form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST" class="buybutton">
+        <script src="//checkout.stripe.com/v2/checkout.js"
+                class="stripe-button"
+                data-key="@Stripe.Value.PublishableKey"
+                data-locale="auto"
+                data-description="J41564 Food Order Charge"
+                data-amount="@Model.AmountToPay"
+                data-currency="GBP">
+        </script>
+    </form>
+</div>
 
 
 

@@ -3,42 +3,131 @@ body {
 }
 
 .wrapper {
-  width: 1000px;
+  width: 1200px;
+  height: 1200px;
   margin: 0px auto;
-  background-color: #333;
-  padding: 40px;
-  height: 1000px;
+  background-color: #787;
 }
 
-header {
-  background-color: #666;
-  width: 1000px;
-  height: 100px;
-  margin-bottom: 30px;
+header{
+    background-image: url("../images/kitchenbanner.jpg");
+    height:300px;
 }
 
-header h1 {
-  margin: 0px auto;
-  text-align: center;
-  color: white;
-  line-height: 100px;
+.headerwrapper {
+    float: left;
+    height: 180px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: black;
+    background: rgba(20,20,20, 0.6);
+    margin: 40px 0px;
 }
 
 nav {
-    margin: 0px auto;
-    text-align: center;
+    margin: 70px 0px;
+}
 
+button {
+    float: left;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    border: 2px solid;
+}
+
+.buttonli{
+    margin-top: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid;
+}
+
+nav a:hover {
+    background-color: grey;
+    color: black;
+}
+
+button:hover {
+    background-color: grey;
+    color: black;
+    cursor: pointer;
 }
 
 nav li {
-  margin: 0px 20px;
+    margin: 10px 10px;
+    float: left;
+    list-style: none;
+}
+
+.greeting {
+    float: right;
+    margin: 0px;
+    width: 400px;
+    color: white;
+}
+
+.articles{
+    width: 1100px;
+    margin: 50px 80px;
+}
+
+.article {
+    float: left;
+    width: 300px;
+    height: 500px;
+    color: white;
+    padding: 20px;
+    background-color: black;
+    background: rgba(20,20,20, 0.3);
+}
+
+.article a {
+    color: white;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+
+form a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 20px;
 }
 
 h1 {
+    float: left;
+    text-align: center;
+    color: white;
+    margin: 20px 0px;
+    font-size: 50px;
+    width: 100%;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
 
-  text-align: center;
-  margin: 20px 0px;
-
+h2 {
+    float: left;
+    margin-top: 100px;
+    width: 100%;
+    text-align: center;
 }
 
 p {
@@ -46,34 +135,82 @@ p {
     text-align: center;
 }
 
-h2 {
-
-    text-align: center;
+.login{
+    width: 100%;
+    float: left;
+    margin: 0px 400px;
 }
 
+.contact {
+    width: 100%;
+    float: left;
+    margin: 0px 410px;
+}
+
+.contact input {
+    float: right;
+    padding: 10px;
+    margin: 10px;
+}
+
+.login input {
+    float: right;
+    padding: 10px;
+    margin: 10px;
+}
+
+td, th{
+    text-align: center;
+    padding: 10px;
+}
+
+.additem {
+    width: 100%;
+    float: left;
+    margin: 0px 410px;
+}
 
 form {
-    text-align: center;
+    margin: 0px auto;
+    float: left;
 }
 
-.main-article {
-  width: 400px;
-  float: left;
-  color: white;
-  background-color: #666;
-  padding: 20px;
-  margin-right: 30px;
-  text-align: center;
+table, th, td {
+    border: 1px solid black;
 }
 
+label {
+    float: left;
+    padding: 10px;
+    margin: 10px;
+}
 
-.secondary-article{
-  width: 400px;
-  float: right;
-  color: white;
-  background-color: #666;
-  padding: 20px;
-  margin-right: 30px;
-  text-align: center;
+.loginbutton {
+    float: left;
+    margin: 10px;
+}
+
+.additem form div {
+    margin: 30px;
+}
+
+.checkout {
+    float: left;
+    margin: 20px 400px;
+    color: white;
+}
+
+.ordermenu {
+    float: left;
+    margin: 20px 150px;
+    color: white;
+}
+
+.buybutton{
+    margin: 50px 150px;
+}
+
+footer {
+    float: none;
 }
 

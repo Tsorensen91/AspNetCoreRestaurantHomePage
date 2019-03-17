@@ -8,20 +8,23 @@
 
 <h2>Contact</h2>
 
-<form method="post">
-    <div asp-validation-summary="All"></div>
-    <div>
-        <label asp-for="Input.Name">Name</label>
-        <input asp-for="Input.Name" class="form-control" />
+<div class="contact">
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+        <div>
+            <label asp-for="Input.Name">Name</label>
+            <input asp-for="Input.Name" class="form-control" />
+        </div><div>
+            <label asp-for="Input.Email">Email</label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email"></span>
+        </div><div>
+            <label asp-for="Input.Message">Message</label>
+            <input asp-for="Input.Message" />
+        </div>
 
-        <label asp-for="Input.Email">Email</label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email"></span>
+        <button type="submit">Send Message</button>
+    </form>
 
-        <label asp-for="Input.Message">Message</label>
-        <input asp-for="Input.Message" />
-    </div>
-    
-    <button type="submit">Send Message</button>
-</form>
+</div>
 

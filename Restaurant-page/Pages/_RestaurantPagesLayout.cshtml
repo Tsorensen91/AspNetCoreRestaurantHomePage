@@ -14,36 +14,58 @@
     <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div>
-        <nav>
-            <ul>
-                <li><a asp-page="/Index">Home</a></li>
-                <li><a asp-page="/OrderMenu">Menu</a></li>
-                <li><a asp-page="/Contact">Contact Us</a></li>
-                @if (SignInManager.IsSignedIn(User) == false)
-                {
-                    <li><a asp-page="/Account/Login">Login/Register</a></li>
-                }
-                </ul>
-        </nav>
-        <div class="greeting, logout">
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <h2>Hello @UserManager.GetUserName(User)</h2>
-                @if (User.IsInRole("Admin"))
-                {
-                    <p>Logged in as Admin</p>
-                    <p><a asp-page="/OrderMenu">Edit Menu</a></p>
-                    <p><a asp-page="/AddMenuItem">Add Item to Menu</a></p>
+    <div class="wrapper">
+        <header>
+            <div class="headerwrapper">
+                <nav>
+                    <ul>
+                        <li><a asp-page="/Index">Home</a></li>
+                        <li><a asp-page="/OrderMenu">Menu</a></li>
+                        <li><a asp-page="/Contact">Contact Us</a></li>
+                        @if (SignInManager.IsSignedIn(User) == false)
+                        {
+                            <li><a asp-page="/Account/Login">Login/Register</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-page="/AddMenuItem">Add Item to Menu</a></li>
+                        }
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li><a asp-page="/Checkout">Checkout / See Basket</a></li>
+                            <li class="buttonli">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit">Log out</button>
+                                </form>
+                            </li>
+                        }
+                    </ul>
 
-                }
-                <p><a asp-page="/Checkout">Checkout / See Basket</a></p>
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit">Log out</button>
-                </form>
-            }
-        </div>
-        @RenderBody()
+                </nav>
+                <div>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <h2 class="greeting">Hello @UserManager.GetUserName(User)</h2>
+                    }
+
+                </div>
+                <div class="shoptitle">
+                    <h1>Abra Kebabra</h1>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div>
+                @RenderBody()
+            </div>
+        </main>
     </div>
+        <footer>
+            <a href="http://validator.w3.org/check?uri=referer">Validate HTML</a>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">Validate CSS</a>
+            <a asp-page="./Admin">Admin</a>
+        </footer>
+        
 </body>
 </html>

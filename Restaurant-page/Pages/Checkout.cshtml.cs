@@ -15,14 +15,14 @@ namespace Restaurant_page.Pages
     [Authorize]
     public class CheckoutModel : PageModel
     {
-
+        
         private readonly AppDbContext _db;
         private readonly UserManager<ApplicationUser> _UserManager;
         public IList<CheckoutItem> Items { get; private set; }
         public OrderHistory Order = new OrderHistory();
-
         public decimal OrderTotal = 0;
         public long AmountToPay = 0;
+
         
 
         public CheckoutModel(AppDbContext db, UserManager<ApplicationUser> UserManager)
@@ -30,7 +30,6 @@ namespace Restaurant_page.Pages
             _db = db;
             _UserManager = UserManager;
         }
-
 
         public async Task OnGetAsync()
         {
@@ -47,13 +46,55 @@ namespace Restaurant_page.Pages
                 OrderTotal = OrderTotal + (item.Quantity * item.Price);
             }
             AmountToPay = (long)(OrderTotal * 100);
+        }
 
+        public async Task<IActionResult> OnPostAddAsync(int id)
+        {
+            var user = await _UserManager.GetUserAsync(User);
+            CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
+
+            Items = _db.CheckoutItems.FromSql(
+                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
+
+            foreach (var item in Items)
+            {
+                if (item.MenuID == id)
+                {
+                    item.Quantity++;
+                }
+            }
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSubtractAsync(int id)
+        {
+            var user = await _UserManager.GetUserAsync(User);
+            CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
+
+            Items = _db.CheckoutItems.FromSql(
+                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
+
+            foreach (var item in Items)
+            {
+                if (item.MenuID == id)
+                {
+                    item.Quantity--;
+                }
+                if(item.Quantity <= 0)
+                {
+                    Items.Remove(item);
+                }
+            }
+
+            return Page();
         }
 
 
         public async Task<IActionResult> OnPostChargeAsync(string stripeEmail, string stripeToken, long amount)
         {
-
+            
             var customers = new CustomerService();
             var charges = new ChargeService();
             var customer = customers.Create(new CustomerCreateOptions{Email = stripeEmail, SourceToken = stripeToken});
