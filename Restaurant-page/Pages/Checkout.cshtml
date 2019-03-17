@@ -1,0 +1,34 @@
+﻿@page
+@model Restaurant_page.Pages.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Checkout</h2>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td><input type="number" step="1" value=@item.Quantity></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" asp-page-handler="Buy">Buy</button>
+</form>
+
+
