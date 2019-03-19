@@ -32,7 +32,7 @@
                         }
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li><a asp-page="/Checkout">Checkout / See Basket</a></li>
+                            <li><a asp-page="/Checkout">Checkout / Basket</a></li>
                             <li class="buttonli">
                                 <form asp-controller="Account" asp-action="Logout" method="post">
                                     <button type="submit">Log out</button>

@@ -40,6 +40,7 @@ namespace Restaurant_page.Pages
                 "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
                 "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
 
+
             OrderTotal = 0;
             foreach (var item in Items)
             {
@@ -48,6 +49,8 @@ namespace Restaurant_page.Pages
             AmountToPay = (long)(OrderTotal * 100);
         }
 
+
+        //add 1 quantity to item
         public async Task<IActionResult> OnPostAddAsync(int id)
         {
             var user = await _UserManager.GetUserAsync(User);
@@ -55,18 +58,36 @@ namespace Restaurant_page.Pages
 
             Items = _db.CheckoutItems.FromSql(
                 "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
-                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0} AND BasketItems.MenuID = {1}", customer.BasketID, id).ToList();
 
             foreach (var item in Items)
             {
-                if (item.MenuID == id)
+                IList<CheckoutBasketItem> itemsToAlter = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE MenuID = {0} AND BasketID = {1} ", id, customer.BasketID).ToList();
+                foreach (var itemToAlter in itemsToAlter)
                 {
-                    item.Quantity++;
+                    itemToAlter.Quantity = itemToAlter.Quantity + 1;
+
+                        _db.Attach(itemToAlter).State = EntityState.Modified;
+                        try
+                        {
+                            await _db.SaveChangesAsync();
+                        }
+                        catch (DbUpdateConcurrencyException e)
+                        {
+                            throw new Exception($"MenuItem {itemToAlter.MenuID} not found!", e);
+                        }
+                    
+
+                    return RedirectToPage();
                 }
+
             }
             return Page();
         }
 
+
+
+        //remove 1 quantity from item
         public async Task<IActionResult> OnPostSubtractAsync(int id)
         {
             var user = await _UserManager.GetUserAsync(User);
@@ -74,24 +95,41 @@ namespace Restaurant_page.Pages
 
             Items = _db.CheckoutItems.FromSql(
                 "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
-                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0} AND BasketItems.MenuID = {1}", customer.BasketID, id).ToList();
 
             foreach (var item in Items)
             {
-                if (item.MenuID == id)
+                IList<CheckoutBasketItem> itemsToAlter = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE MenuID = {0} AND BasketID = {1} ", id, customer.BasketID).ToList();
+                foreach (var itemToAlter in itemsToAlter)
                 {
-                    item.Quantity--;
-                }
-                if(item.Quantity <= 0)
-                {
-                    Items.Remove(item);
+                    itemToAlter.Quantity = itemToAlter.Quantity - 1;
+
+                    if (itemToAlter.Quantity <= 0)
+                    {
+                            _db.BasketItems.Remove(itemToAlter);
+                            await _db.SaveChangesAsync();
+                        
+                    } else { 
+
+                    _db.Attach(itemToAlter).State = EntityState.Modified;
+                    try
+                    {
+                        await _db.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        throw new Exception($"MenuItem {itemToAlter.MenuID} not found!", e);
+                    }
+                    }
+
+                    return RedirectToPage();
                 }
             }
 
             return Page();
         }
 
-
+        //pay
         public async Task<IActionResult> OnPostChargeAsync(string stripeEmail, string stripeToken, long amount)
         {
             
@@ -135,7 +173,7 @@ namespace Restaurant_page.Pages
 
             await _db.SaveChangesAsync();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/PaymentRecieved");
         }
 
 

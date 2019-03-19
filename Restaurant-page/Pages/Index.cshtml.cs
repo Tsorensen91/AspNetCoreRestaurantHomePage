@@ -21,7 +21,7 @@ namespace Restaurant_page.Pages
 
         public void OnGet()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
         }
     }
 }

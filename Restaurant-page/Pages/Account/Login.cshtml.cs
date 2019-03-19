@@ -13,7 +13,10 @@ namespace Restaurant_page.Pages.Account
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public GuestLogin Input { get; set; }
+        public GuestLogin LoginInput { get; set; }
+        [BindProperty]
+        public GuestRegister RegisterInput { get; set; }
+        
         public CheckoutCustomer Customer = new CheckoutCustomer();
         public CheckoutBasket Basket = new CheckoutBasket();
 
@@ -33,10 +36,16 @@ namespace Restaurant_page.Pages.Account
         {
             if (ModelState.IsValid)
             {
-                var loginResult = await _signInManager.PasswordSignInAsync(Input.Email, Input.LoginPassword, false, lockoutOnFailure: false);
+                if (LoginInput.Email == null || LoginInput.LoginPassword == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Must enter Email AND Password");
+                    return Page();
+                }
+
+                var loginResult = await _signInManager.PasswordSignInAsync(LoginInput.Email, LoginInput.LoginPassword, false, lockoutOnFailure: false);
                 if (loginResult.Succeeded)
                 {
-                    return LocalRedirect("/Index");
+                    return RedirectToPage("/Index");
                 }
                 else
                 {
@@ -52,17 +61,23 @@ namespace Restaurant_page.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var guest = new ApplicationUser { UserName = Input.RegisterEmail, Email = Input.RegisterEmail };
-                var result = await _userManager.CreateAsync(guest, Input.RegisterPassword);
+                if (RegisterInput.RegisterEmail == null || RegisterInput.RegisterPassword == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Must enter Email AND Password");
+                    return Page();
+                }
+
+                var guest = new ApplicationUser { UserName = RegisterInput.RegisterEmail, Email = RegisterInput.RegisterEmail };
+                var result = await _userManager.CreateAsync(guest, RegisterInput.RegisterPassword);
 
                 if (result.Succeeded)
                 {
-                    var newGuest = await _userManager.FindByEmailAsync(Input.RegisterEmail);
+                    var newGuest = await _userManager.FindByEmailAsync(RegisterInput.RegisterEmail);
                     var setRole = await _userManager.AddToRoleAsync(newGuest, "Member");
                     await _signInManager.SignInAsync(guest, isPersistent: false);
 
-                    NewCheckoutBasket(Input.RegisterEmail);
-                    NewCustomer(Input.RegisterEmail);
+                    NewCheckoutBasket(RegisterInput.RegisterEmail);
+                    NewCustomer(RegisterInput.RegisterEmail);
                     await _db.SaveChangesAsync();
 
                     return RedirectToPage("/Index");

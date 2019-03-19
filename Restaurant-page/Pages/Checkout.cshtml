@@ -12,34 +12,46 @@
 <h2>Checkout</h2>
 <div class="checkout">
     <form method="post">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
+        @if (Model.OrderTotal == 0)
+        {
+            <p>Basket is currently empty, go to Menu to add items to basket.</p>
+        }
+        else
+        {
+            <table class="table">
 
-            <tbody>
-                @foreach (var item in Model.Items)
-                {
+                <thead>
                     <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Price.ToString("C")</td>
-                        <td>@item.Quantity</td>
-                        <td>
-                            <button type="submit" asp-page-handler="Add" asp-route-id="@item.MenuID">Add Another</button>
-                        </td>
-                        <td>
-                            <button type="submit" asp-page-handler="Subtract" asp-route-id="@item.MenuID">Remove One</button>
-                        </td>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <div> Price Total = @Model.OrderTotal.ToString("C")</div>
+                </thead>
+
+                <tbody>
+
+
+
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Price.ToString("C")</td>
+                            <td>@item.Quantity</td>
+                            <td>
+                                <button type="submit" asp-page-handler="Add" asp-route-id="@item.MenuID">Add Another</button>
+                            </td>
+                            <td>
+                                <button type="submit" asp-page-handler="Subtract" asp-route-id="@item.MenuID">Remove One</button>
+                            </td>
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        }
     </form>
+    <div class="total"> Price Total = @Model.OrderTotal.ToString("C")</div>
     <form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST" class="buybutton">
         <script src="//checkout.stripe.com/v2/checkout.js"
                 class="stripe-button"

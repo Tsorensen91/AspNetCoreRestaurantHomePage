@@ -4,7 +4,7 @@ body {
 
 .wrapper {
   width: 1200px;
-  height: 1200px;
+  height: 1400px;
   margin: 0px auto;
   background-color: #787;
 }
@@ -57,13 +57,13 @@ nav a {
     border: 2px solid;
 }
 
-nav a:hover {
-    background-color: grey;
+a:hover {
+    background-color: #787;
     color: black;
 }
 
 button:hover {
-    background-color: grey;
+    background-color: #787;
     color: black;
     cursor: pointer;
 }
@@ -79,6 +79,8 @@ nav li {
     margin: 0px;
     width: 400px;
     color: white;
+    background: rgba(20,25,20, 0.9);
+    padding: 6px;
 }
 
 .articles{
@@ -97,10 +99,16 @@ nav li {
 }
 
 .article a {
-    color: white;
-    text-align: center;
-    width: 100%;
     float: left;
+    width: 70%;
+    text-align: center;
+    text-decoration: none;
+    margin: 0px 10%;
+    padding: 5%;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    border: 2px solid;
 }
 
 form a {
@@ -113,6 +121,34 @@ form a {
     margin: 20px;
 }
 
+.paymentRecieved {
+    float: left;
+    width: 50%;
+    margin: 0px 23%;
+    background: rgba(20,20,20, 0.3);
+}
+
+.paymentRecieved a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.paymentRecieved li {
+    padding: 20px;
+}
+
+.paymentRecieved ul {
+    list-style: none;
+    text-align: center;
+    padding: 20px;
+    
+}
+
 h1 {
     float: left;
     text-align: center;
@@ -123,10 +159,17 @@ h1 {
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
+header h1 {
+    margin: 0px;
+    margin-bottom: 40px;
+}
+
 h2 {
     float: left;
-    margin-top: 100px;
+    padding: 20px 0px;
     width: 100%;
+    color: white;
+    background: rgba(20,20,20, 0.3);
     text-align: center;
 }
 
@@ -136,7 +179,7 @@ p {
 }
 
 .login{
-    width: 100%;
+    width: 400px;
     float: left;
     margin: 0px 400px;
 }
@@ -159,6 +202,11 @@ p {
     margin: 10px;
 }
 
+.login button {
+    margin: 50px;
+    width: 70%;
+}
+
 td, th{
     text-align: center;
     padding: 10px;
@@ -171,18 +219,20 @@ td, th{
 }
 
 form {
+    
     margin: 0px auto;
     float: left;
 }
 
 table, th, td {
+    background: rgba(20,20,20, 0.3);
     border: 1px solid black;
 }
 
 label {
     float: left;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 30px;
 }
 
 .loginbutton {
@@ -196,8 +246,21 @@ label {
 
 .checkout {
     float: left;
-    margin: 20px 400px;
+    margin: 20px 470px;
     color: white;
+}
+
+.checkout p {
+    color: black;
+    float: left;
+    width: 300px;
+}
+
+.total {
+    float: left;
+    color: black;
+    font-size: 30px;
+    margin: 20px 10px;
 }
 
 .ordermenu {
@@ -207,7 +270,17 @@ label {
 }
 
 .buybutton{
-    margin: 50px 150px;
+    margin: 50px 80px;
+}
+
+iframe {
+    float: left;
+    width: 80%;
+    margin: 50px 10%;
+}
+
+.loginwindow {
+    width: 100%;
 }
 
 footer {
