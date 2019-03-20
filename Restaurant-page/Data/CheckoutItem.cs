@@ -17,6 +17,8 @@ namespace Restaurant_page.Data
         public string Name { get; set; }
         [Required]
         public int Quantity { get; set; }
+        [Required]
+        public int Stock { get; set; }
 
     }
 }

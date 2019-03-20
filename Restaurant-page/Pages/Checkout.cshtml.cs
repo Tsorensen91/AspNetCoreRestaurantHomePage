@@ -38,14 +38,26 @@ namespace Restaurant_page.Pages
             CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
 
             Items = _db.CheckoutItems.FromSql(
-                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
+                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, MenuItems.Stock, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
                 "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
 
 
             OrderTotal = 0;
             foreach (var item in Items)
             {
+                //checks to see if item has gone out of stock since added to basket
+                if (item.Stock <= 0)
+                {
+                    IList<CheckoutBasketItem> itemsToDelete = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE BasketID = {0} and MenuID = {1}", customer.BasketID, item.MenuID).ToList();
+                    foreach (var itemToDelete in itemsToDelete)
+                    {
+                        _db.BasketItems.Remove(itemToDelete);
+                        await _db.SaveChangesAsync();
+                    }
+
+                } else {
                 OrderTotal = OrderTotal + (item.Quantity * item.Price);
+                }
             }
             AmountToPay = (long)(OrderTotal * 100);
         }

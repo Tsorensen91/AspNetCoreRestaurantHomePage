@@ -1,3 +1,5 @@
+
+/*Overall page sizing / layout*/
 body {
     background-color: #E6E6FA;
     height: 1600px;
@@ -28,10 +30,7 @@ header{
     margin: 40px 0px;
 }
 
-nav {
-    margin: 70px 0px;
-}
-
+/* Buttons to look like anchors */
 button {
     float: left;
     color: white;
@@ -42,18 +41,36 @@ button {
     border: 2px solid;
 }
 
+/* Access denied page */
 .noaccess{
     width: 60%;
     margin: 0px 20%;
 }
 
+/* Logout button in layout */
 .buttonli{
     margin-top: 0px;
 }
 
+/* Footer design */
 a {
     text-decoration: none;
     color: black;
+}
+
+footer {
+    float: none;
+    width: 100%;
+    text-align: center;
+}
+
+footer a {
+    margin-right: 40px;
+}
+
+/* General header-design */
+nav {
+    margin: 70px 0px;
 }
 
 nav a {
@@ -68,12 +85,14 @@ nav a {
 a:hover {
     background-color: #787;
     color: black;
+    text-shadow: none;
 }
 
 button:hover {
     background-color: #787;
     color: black;
     cursor: pointer;
+    text-shadow: none;
 }
 
 nav li {
@@ -89,16 +108,26 @@ nav li {
     color: white;
     background: rgba(20,25,20, 0.9);
     padding: 6px;
-
 }
 
-footer a {
-    margin-right: 40px;
+
+
+/* Index/Home page design */
+.arrival p {
+    float: left;
+    color: white;
+    background: rgba(20,20,20, 0.3);
+    font-size: 30px;
+    width: 30%;
+    margin: 0px 35%;
+    margin-bottom: 10px;
 }
 
-.articles{
+.articles {
     width: 1100px;
     margin: 10px 80px;
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 .article {
@@ -125,6 +154,7 @@ footer a {
     border: 2px solid;
 }
 
+/* Design for links in forms */
 form a {
     text-decoration: none;
     color: white;
@@ -135,34 +165,8 @@ form a {
     margin: 20px;
 }
 
-.paymentRecieved {
-    float: left;
-    width: 50%;
-    margin: 0px 23%;
-    background: rgba(20,20,20, 0.3);
-}
 
-.paymentRecieved a {
-    text-decoration: none;
-    color: white;
-    background-color: black;
-    padding: 10px;
-    border: 2px solid;
-    border-radius: 5px;
-    margin: 20px;
-}
-
-.paymentRecieved li {
-    padding: 20px;
-}
-
-.paymentRecieved ul {
-    list-style: none;
-    text-align: center;
-    padding: 20px;
-    
-}
-
+/*General titles and pagenames*/
 h1 {
     float: left;
     text-align: center;
@@ -170,6 +174,7 @@ h1 {
     margin: 20px 0px;
     font-size: 50px;
     width: 100%;
+    /* adds black border around text to improve contrast and increase */
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
@@ -191,37 +196,65 @@ h2 {
     float: none;
     border: 2px solid black;
     width: 1196px;
-
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
+
+/* General changes */
 p {
     text-align: center;
 }
 
+textarea {
+    height: 70px;
+    width: 140px;
+}
+
+td, th {
+    text-align: center;
+    height: 40px;
+    padding: 20px;
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+form {
+    margin: 0px auto;
+    float: left;
+}
+
+table, th, td {
+    background: rgba(20,20,20, 0.3);
+    border: 2px solid black;
+}
+
+label {
+    float: left;
+    padding: 10px;
+    margin: 10px 30px;
+}
+
+
+/* Login screen design */
 .login{
     width: 400px;
     float: left;
     margin: 0px 400px;
 }
 
-    .login form {
-        border: 2px solid black;
-        width: 400px;
-        background: rgba(20,20,20, 0.3);
-        color: white;
-        margin-bottom: 50px;
-    }
-
-.contact {
+.loginwindow {
     width: 100%;
-    float: left;
-    margin: 0px 410px;
 }
 
-.contact input {
-    float: right;
-    padding: 10px;
-    margin: 10px;
+.login form {
+    border: 2px solid black;
+    width: 400px;
+    background: rgba(20,20,20, 0.3);
+    color: white;
+    margin-bottom: 50px;
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 .login input {
@@ -235,12 +268,32 @@ p {
     width: 70%;
 }
 
-td, th{
-    text-align: center;
-    height: 40px;
-    padding: 20px;
+.loginbutton {
+    float: left;
+    margin: 10px;
 }
 
+/* Contact design */
+.contact {
+    width: 100%;
+    color: white;
+    float: left;
+    margin: 0px 410px;
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.contact input {
+    float: right;
+    padding: 10px;
+    margin: 10px;
+}
+
+.contact button {
+    margin-left: 170px;
+}
+
+/* Add item design */
 .additem {
     width: 100%;
     float: left;
@@ -268,28 +321,12 @@ td, th{
     width: 100%;
 }
 
-    .additem button {
-        float: left;
-        margin: 50px 550px;
-    }
-
-form {
-    
-    margin: 0px auto;
+.additem button {
     float: left;
+    margin: 50px 550px;
 }
 
-table, th, td {
-    background: rgba(20,20,20, 0.3);
-    border: 2px solid black;
-}
-
-label {
-    float: left;
-    padding: 10px;
-    margin: 10px 30px;
-}
-
+/* Menu page design */
 .backtomenu{
     float: left;
     width: 150px;
@@ -306,11 +343,7 @@ label {
     margin: 20px;
 }
 
-.loginbutton {
-    float: left;
-    margin: 10px;
-}
-
+/* Checkout page design */
 .checkout {
     float: left;
     margin: 20px 400px;
@@ -330,16 +363,7 @@ label {
     margin: 20px 10px;
 }
 
-.arrival p {
-    float: left;
-    color: white;
-    background: rgba(20,20,20, 0.3);
-    font-size: 30px;
-    width: 30%;
-    margin: 0px 35%;
-    margin-bottom: 10px;
-}
-
+/* Admin page design */
 .admin {
     float: left;
     width: 100%;
@@ -347,17 +371,19 @@ label {
     color: white;
 }
 
-    .admin h3 {
-        width: 250px;
-        background: rgba(20,20,20, 0.3);
-        text-align: center;
+.admin h3 {
+    width: 250px;
+    background: rgba(20,20,20, 0.3);
+    text-align: center;
         
-    }
+}
 
 .admin .tblname {
     width: 1500px;
 }
 
+
+/* Order menu design */
 .ordermenu {
     float: left;
     margin: 20px 15%;
@@ -370,6 +396,8 @@ label {
     color: white;
 }
 
+/* Edit menu item design */
+
 .edititem {
     float: left;
     margin: 20px 520px;
@@ -380,16 +408,13 @@ label {
     margin: 50px;
 }
 
-textarea {
-    height: 70px;
-    width: 140px;
-}
-
+/*Checkout stripe pay button*/
 .buybutton{
     width: 100%;
     margin: 50px 80px;
 }
 
+/*Style for google maps*/
 iframe {
     float: left;
     width: 80%;
@@ -398,16 +423,7 @@ iframe {
     margin: 50px 10%;
 }
 
-.loginwindow {
-    width: 100%;
-}
-
-footer {
-    float: none;
-    width: 100%;
-    text-align: center;
-}
-
+/*Burger-menu*/
 .mobile-menu {
     width: 250px;
     position: fixed;
@@ -447,10 +463,6 @@ footer {
     margin-top: 5px;
 }
 
-#current-page-button-mobile {
-    background-color: rgba(0,0,0,0.25);
-}
-
 .mobile-menu a:hover {
     background-color: rgba(0,0,0,0.25);
 }
@@ -460,7 +472,7 @@ footer {
     padding: 0px 25px 0px 35px;
 }
 
-
+/* Checkbox + label to go with burger-menu*/
 .burger-checkbox {
     display: none;
 }
@@ -475,7 +487,7 @@ footer {
     font-weight: bold;
     font-size: 50px;
     float: right;
-    color: #EEE;
+    color: white;
     text-decoration: none;
     border-radius: 4px;
     background-color: rgba(0,0,0,0.6);
@@ -500,9 +512,50 @@ footer {
     cursor: pointer;
 }
 
+/*Website flexible on devices*/
 @media (max-width: 1200px) {
+    /* Overall sizing to use percentages mainly. */
     .wrapper {
         width: 100%;
+    }
+
+    main, .pagetitle, .article, .menupage{
+        width: 100%;
+    }
+
+    .articles {
+        width: 85%;
+    }
+
+    .backtomenu {
+        margin: 0px;
+        padding: 0px;
+        width: 40%;
+        margin-bottom: 20px;
+    }
+
+    /* Stripping padding and margins away from tables and site designs. */
+    table, th, td {
+        padding: 0px;
+        margin: 0px;
+    }
+    .admin, .login, .additem, .articles, .checkout, .contact, .edititem, .menupage, .ordermenu {
+        margin: 1%;
+        padding: 0px;
+    }
+
+    /* Admin & MenuItem display remains intact */
+    .admin {
+        overflow: auto;
+    }
+
+    .menupage {
+        overflow: auto;
+    }
+
+    /* Header changes to mobile design. */
+    .greeting {
+        display: none;
     }
 
     .main-menu {
@@ -511,5 +564,30 @@ footer {
 
     .burger-label {
         display: block;
+    }
+
+    .shoptitle {
+        float: left;
+        margin: 70px 0px;
+        margin-left: 10%;
+    }
+
+}
+
+@media (max-width: 600px) {
+    /* Hides Title and adds overflow on very small displays. */
+    .shoptitle {
+        display: none;
+    }
+    main {
+        overflow: auto;
+    }
+
+    table, th, td {
+        padding: 20px;
+        margin: 20px;
+    }
+    .ordermenu {
+        width: 1200px;
     }
 }
