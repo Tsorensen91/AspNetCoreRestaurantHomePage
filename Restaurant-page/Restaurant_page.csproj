@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\mailChecker\**" />
+    <Content Remove="wwwroot\mailChecker\**" />
+    <EmbeddedResource Remove="wwwroot\mailChecker\**" />
+    <None Remove="wwwroot\mailChecker\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Guest.cs" />
     <Compile Remove="Migrations\20190314150235_initialCreate.cs" />
     <Compile Remove="Migrations\20190314150235_initialCreate.Designer.cs" />
@@ -26,7 +33,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\mailChecker\" />
   </ItemGroup>
 
 </Project>
