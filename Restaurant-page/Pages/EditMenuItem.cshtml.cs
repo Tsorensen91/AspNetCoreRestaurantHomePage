@@ -22,6 +22,8 @@ namespace Restaurant_page.Pages
 
         private readonly AppDbContext _db;
         private readonly IHostingEnvironment _he;
+        public IList<MenuItem> MenuItems;
+        public string CurrentImage;
         [BindProperty]
         public IFormFile ItemImage { get; set; }
         public EditMenuItemModel(AppDbContext db, IHostingEnvironment he) {
@@ -32,6 +34,7 @@ namespace Restaurant_page.Pages
         public async Task<IActionResult> OnGetAsync(int id)
         {
             MenuItem = await _db.MenuItems.FindAsync(id);
+
             if (MenuItem == null)
             {
                 return RedirectToPage("/Admin/Index");
@@ -51,9 +54,30 @@ namespace Restaurant_page.Pages
                 var filename = Path.Combine(_he.WebRootPath, "images", Path.GetFileName(ItemImage.FileName));
                 MenuItem.Image = Path.Combine("images", Path.GetFileName(ItemImage.FileName));
                 ItemImage.CopyTo(new FileStream(filename, FileMode.Create));
+
+                //the rootpath used for images uses backslash, this logic swaps those to forward slashes for HTML validation purposes.
+                string imagePath = "";
+                foreach (var letter in MenuItem.Image)
+                {
+                    var letterToUse = 'a';
+                    if (letter == '\\')
+                    {
+                        letterToUse = '/';
+                    }
+                    else
+                    {
+                        letterToUse = letter;
+                    }
+                    imagePath += letterToUse;
+
+                }
+                MenuItem.Image = imagePath;
             } else
             {
-                //want to add something to ensure editing menu item doesn't delete picture.
+                //logic to ensure editing menu item doesn't delete picture when no picture selected.
+                MenuItems = _db.MenuItems.AsNoTracking().FromSql("SELECT top 1 * FROM MenuItems WHERE MenuID = {0}", MenuItem.MenuID).ToList();
+                MenuItem.Image = MenuItems[0].Image;
+                
             }
 
             _db.Attach(MenuItem).State = EntityState.Modified;

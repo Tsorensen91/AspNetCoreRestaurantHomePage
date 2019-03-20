@@ -35,6 +35,24 @@ namespace Restaurant_page.Pages
                 var filename = Path.Combine(_he.WebRootPath, "images", Path.GetFileName(ItemImage.FileName));
                 MenuItem.Image = Path.Combine("images", Path.GetFileName(ItemImage.FileName));
                 ItemImage.CopyTo(new FileStream(filename, FileMode.Create));
+
+                //the rootpath used for images uses backslash, this logic swaps those to forward slashes for HTML validation purposes.
+                string imagePath = "";
+                foreach (var letter in MenuItem.Image)
+                {
+                    var letterToUse = 'a';
+                    if (letter == '\\')
+                    {
+                        letterToUse = '/';
+                    }
+                    else
+                    {
+                        letterToUse = letter;
+                    }
+                    imagePath += letterToUse;
+
+                }
+                MenuItem.Image = imagePath;
             }
 
             _db.MenuItems.Add(MenuItem);

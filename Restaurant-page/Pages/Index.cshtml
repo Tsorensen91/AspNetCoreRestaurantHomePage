@@ -29,26 +29,9 @@
 </div>
 <div class="articles">
     @foreach (var menuItem in Model.MenuItems)
-    {//the rootpath used for images uses backslash, this logic swaps those to forward slashes for HTML validation purposes.
-        string imagePath = "";
-
-            @foreach (var letter in menuItem.Image)
-            {
-                var letterToUse = 'a';
-
-                if (letter == '\\')
-                {
-                    letterToUse = '/';
-                }
-                else
-                {
-                    letterToUse = letter;
-                }
-                imagePath += letterToUse;
-
-            }
+    {
             <article class="article">
-                <img src="@Url.Content("/CO5227/" + imagePath)" alt="picture of food: @imagePath" />
+                <img src="@Url.Content("/CO5227/" + menuItem.Image)" alt="picture of food: @menuItem.Image" />
                 <h3><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></h3>
                 <h2>@menuItem.Price.ToString("C")</h2>
                 <p>@menuItem.Description</p>
