@@ -32,6 +32,9 @@
             <tbody>
                 @foreach (var menuItem in Model.MenuItems)
                 {
+                    if(menuItem.Stock > 0)
+                    {
+
                     <tr>
                         <td><img src="@Url.Content(menuItem.Image)" alt="@menuItem.Image" /></td>
                         <td><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></td>
@@ -47,6 +50,7 @@
                             <td><p>Please sign in to add Items to basket.</p></td>
                         }
                     </tr>
+                    }
                 }
             </tbody>
 

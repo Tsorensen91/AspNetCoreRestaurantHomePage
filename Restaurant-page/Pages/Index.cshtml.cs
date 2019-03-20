@@ -22,30 +22,30 @@ namespace Restaurant_page.Pages
 
         public void OnGet()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems WHERE Stock > 0").ToList();
         }
 
         public void OnGetLogin()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems WHERE Stock > 0").ToList();
             Arrival = "login";
         }
 
         public void OnGetPayment()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems WHERE Stock > 0").ToList();
             Arrival = "payment";
         }
 
         public void OnGetContact()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems WHERE Stock > 0").ToList();
             Arrival = "contact";
         }
 
         public void OnGetLogout()
         {
-            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems WHERE Stock > 0").ToList();
             Arrival = "logout";
         }
     }

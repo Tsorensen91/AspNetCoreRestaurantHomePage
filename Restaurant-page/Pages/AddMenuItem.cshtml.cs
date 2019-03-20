@@ -50,7 +50,6 @@ namespace Restaurant_page.Pages
                         letterToUse = letter;
                     }
                     imagePath += letterToUse;
-
                 }
                 MenuItem.Image = imagePath;
             }

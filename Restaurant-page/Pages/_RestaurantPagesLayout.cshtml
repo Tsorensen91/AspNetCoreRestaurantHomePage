@@ -17,7 +17,10 @@
     <div class="wrapper">
         <header>
             <div class="headerwrapper">
-                <nav>
+                <input class="burger-checkbox" type="checkbox" id="burger-checkbox">
+                <label class="burger-label" for="burger-checkbox"></label>
+                <nav class="mobile-menu">
+                    <h3>Menu</h3>
                     <ul>
                         <li><a asp-page="/Index">Home</a></li>
                         <li><a asp-page="/OrderMenu">Menu</a></li>
@@ -42,6 +45,32 @@
                     </ul>
 
                 </nav>
+                <nav class="main-menu">
+                    <ul>
+                        <li><a asp-page="/Index">Home</a></li>
+                        <li><a asp-page="/OrderMenu">Menu</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-page="/Admin/Index">Admin Page</a></li>
+                        }
+                        <li><a asp-page="/Contact">Contact Us</a></li>
+                        @if (SignInManager.IsSignedIn(User) == false)
+                        {
+                            <li><a asp-page="/Account/Login">Login/Register</a></li>
+                        }
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li><a asp-page="/Checkout">Checkout / Basket</a></li>
+                            <li class="buttonli">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit">Log out</button>
+                                </form>
+                            </li>
+                        }
+                    </ul>
+
+                </nav>
+
                 <div>
                     @if (SignInManager.IsSignedIn(User))
                     {

@@ -408,3 +408,108 @@ footer {
     text-align: center;
 }
 
+.mobile-menu {
+    width: 250px;
+    position: fixed;
+    margin: 0px;
+    top: 0px;
+    left: 0px;
+    transform: translateX(-255px);
+    transition: transform .25s ease-in-out;
+    background-color: #787;
+    height: 100%;
+    border-right: 5px solid #222;
+}
+
+.mobile-menu h3 {
+    color: #FFFFFF;
+    margin: 0;
+    height: 90px;
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.6);
+    line-height: 40px;
+    font-weight: normal;
+}
+
+.mobile-menu ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 10px;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 10px 25px;
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.6);
+    margin-top: 5px;
+}
+
+#current-page-button-mobile {
+    background-color: rgba(0,0,0,0.25);
+}
+
+.mobile-menu a:hover {
+    background-color: rgba(0,0,0,0.25);
+}
+
+.mobile-menu li ul a {
+    font-size: 0.8em;
+    padding: 0px 25px 0px 35px;
+}
+
+
+.burger-checkbox {
+    display: none;
+}
+
+.burger-label {
+    display: none;
+    height: 70px;
+    width: 70px;
+    margin-top: 62px;
+    margin-right: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+    float: right;
+    color: #EEE;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.burger-checkbox:checked ~ .mobile-menu {
+    left: 0;
+    transform: translateX(0px);
+    transition: transform .25s ease-in-out;
+}
+
+.burger-label:hover {
+    background-color: #787;
+    color: black;
+}
+
+.burger-label:before {
+    content: '\2630';
+}
+
+.burger-label:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        width: 100%;
+    }
+
+    .main-menu {
+        display: none;
+    }
+
+    .burger-label {
+        display: block;
+    }
+}

@@ -15,7 +15,8 @@ namespace Restaurant_page.Pages
     [Authorize]
     public class CheckoutModel : PageModel
     {
-        
+        [BindProperty]
+        public MenuItem MenuItem { get; set; }
         private readonly AppDbContext _db;
         private readonly UserManager<ApplicationUser> _UserManager;
         public IList<CheckoutItem> Items { get; private set; }
@@ -158,9 +159,14 @@ namespace Restaurant_page.Pages
             Order.Email = user.Email;
             _db.OrderHistories.Add(Order);
             CheckoutCustomer checkoutCustomer = await _db.CheckoutCustomers.FindAsync(user.Email);
-            var basketItems = _db.BasketItems.FromSql("SELECT * From BasketItems WHERE BasketID = {0}", checkoutCustomer.BasketID).ToList();
+            var basketItems = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE BasketID = {0}", checkoutCustomer.BasketID).ToList();
+            
             foreach (var item in basketItems)
             {
+                MenuItem = await _db.MenuItems.FindAsync(item.MenuID);
+                MenuItem.Stock -= item.Quantity;
+                await _db.SaveChangesAsync();
+
                 Data.OrderItem orderItem = new Data.OrderItem
                 {
                     OrderNo = Order.OrderNo,

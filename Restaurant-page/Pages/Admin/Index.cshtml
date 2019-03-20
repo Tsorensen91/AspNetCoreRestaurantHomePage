@@ -17,6 +17,9 @@
                     <th>Image</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Stock</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -27,6 +30,7 @@
                     <td><img src="@Url.Content(menuItem.Image)" alt="@menuItem.Image" /></td>
                     <td><a asp-page="../Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></td>
                     <td>@menuItem.Price.ToString("C")</td>
+                    <td>@menuItem.Stock</td>
                     <td>
                         <a asp-page="../EditMenuItem" asp-route-id="@menuItem.MenuID">Edit</a>
                     </td>
