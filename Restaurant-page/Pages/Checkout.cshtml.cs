@@ -70,8 +70,8 @@ namespace Restaurant_page.Pages
             CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
 
             Items = _db.CheckoutItems.FromSql(
-                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
-                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0} AND BasketItems.MenuID = {1}", customer.BasketID, id).ToList();
+                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, MenuItems.Stock, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
 
             foreach (var item in Items)
             {
@@ -107,8 +107,8 @@ namespace Restaurant_page.Pages
             CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
 
             Items = _db.CheckoutItems.FromSql(
-                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
-                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0} AND BasketItems.MenuID = {1}", customer.BasketID, id).ToList();
+                "SELECT MenuItems.MenuID, MenuItems.Price, MenuItems.Name, MenuItems.Stock, BasketItems.BasketID, BasketItems.Quantity FROM MenuItems INNER JOIN BasketItems " +
+                "ON MenuItems.MenuID = BasketItems.MenuID WHERE BasketID = {0}", customer.BasketID).ToList();
 
             foreach (var item in Items)
             {

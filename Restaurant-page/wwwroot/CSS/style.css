@@ -351,9 +351,13 @@ label {
 }
 
 .checkout p {
-    color: black;
+    color: white;
     float: left;
     width: 300px;
+    /* adds black border around text to improve contrast and increase */
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    background: rgba(20,20,20, 0.7);
+    padding: 20px;
 }
 
 .total {

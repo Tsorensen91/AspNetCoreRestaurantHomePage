@@ -44,23 +44,26 @@
                             </td>
                         </tr>
                     }
-                    
+
                 </tbody>
             </table>
         }
     </form>
-    <div class="total"> Price Total = @Model.OrderTotal.ToString("C")</div>
-    <form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST" class="buybutton">
-        <script src="//checkout.stripe.com/v2/checkout.js"
-                class="stripe-button"
-                data-key="@Stripe.Value.PublishableKey"
-                data-locale="auto"
-                data-description="J41564 Food Order Charge"
-                data-amount="@Model.AmountToPay"
-                data-currency="GBP">
-        </script>
-    </form>
-</div>
+    @if (Model.OrderTotal > 0)
+    {
+        <div class="total"> Price Total = @Model.OrderTotal.ToString("C")</div>
+        <form asp-page-handler="Charge" asp-route-amount="@Model.AmountToPay" method="POST" class="buybutton">
+            <script src="//checkout.stripe.com/v2/checkout.js"
+                    class="stripe-button"
+                    data-key="@Stripe.Value.PublishableKey"
+                    data-locale="auto"
+                    data-description="J41564 Food Order Charge"
+                    data-amount="@Model.AmountToPay"
+                    data-currency="GBP">
+            </script>
+        </form>
+    }
+    </div>
 
 
 
