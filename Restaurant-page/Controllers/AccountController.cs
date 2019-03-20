@@ -22,7 +22,7 @@ namespace Restaurant_page.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToPage("/index");
+            return RedirectToPage("/index", "Logout");
         }
 
 

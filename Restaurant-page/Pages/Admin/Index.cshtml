@@ -1,0 +1,82 @@
+﻿@page
+@model Restaurant_page.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2 class="pagetitle">Admin Page</h2>
+
+<div class="admin">
+    <h3>Edit Menu:</h3>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var menuItem in Model.MenuItems)
+                {//the rootpath used for images uses backslash, this logic swaps those to forward slashes for HTML validation purposes.
+                    string imagePath = "";
+                <tr>
+                    
+                    @foreach (var letter in menuItem.Image)
+                    {
+                        var letterToUse = 'a';
+
+                        if (letter == '\\')
+                        {
+                            letterToUse = '/';
+                        }
+                        else
+                        {
+                            letterToUse = letter;
+                        }
+                        imagePath += letterToUse;
+
+                    }
+                    <td><img src="@Url.Content(imagePath)" alt="@imagePath" /></td>
+                    <td><a asp-page="../Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></td>
+                    <td>@menuItem.Price.ToString("C")</td>
+                    <td>
+                        <a asp-page="../EditMenuItem" asp-route-id="@menuItem.MenuID">Edit</a>
+                    </td>
+                    <td>
+                        <button type="submit" asp-page-handler="Delete" asp-route-id="@menuItem.MenuID">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                }
+                <tr><td><a asp-page="/AddMenuItem">Add Menu Item</a></td></tr>
+            </tbody>
+        </table>
+
+        <h3>25 most recent orders:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order No</th>
+                    <th>Customer</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderNo</td>
+                        <td>@order.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>
+

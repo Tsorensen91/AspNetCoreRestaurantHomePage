@@ -5,38 +5,50 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Restaurant_page.Data;
+using System.Net;
 using System.Net.Mail;
 
 namespace Restaurant_page.Pages
 {
     public class ContactModel : PageModel
     {
-
         [BindProperty]
         public ContactUsModel Input { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            using (var smtp = new SmtpClient())
+            var mailbody = $@"Contact message recieved from Abra Kebabra:
+
+                            Name: {Input.Name}
+                            Email: {Input.Email}
+                            Message: ""{Input.Message}""";
+            SendMail(mailbody);
+
+            return RedirectToPage("/Index", "contact");
+        }
+
+        private void SendMail(string mailbody)
+        {
+            //adapted from Ben. (2012). Retrieved from https://stackoverflow.com/questions/13506623/smtp-exception-failure-sending-mail.
+            NetworkCredential loginInfo = new NetworkCredential("j41564chester@gmail.com", "1721102chester");
+            using (var message = new MailMessage(Input.Email, "j41564chester@gmail.com"))
             {
-                smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                smtp.PickupDirectoryLocation = @"c:\maildump";
-                var message = new MailMessage
+                message.To.Add(new MailAddress("j41564chester@gmail.com"));
+                message.From = new MailAddress(Input.Email);
+                message.Subject = "Message from Abra Kebabra";
+                message.Body = mailbody;
+
+                using (var smtpClient = new SmtpClient("j41564chester@gmail.com"))
                 {
-                    Subject = "Message from: " + Input.Name,
-                    Body = "Message from: " + Input.Email + " Message: " + Input.Message,
-                    From = new MailAddress("theis.soerensen@hotmail.com")
-                };
-                message.To.Add("theis.soerensen@hotmail.com");
-                await smtp.SendMailAsync(message);
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = loginInfo;
+                    smtpClient.Host = "smtp.gmail.com";
+                    smtpClient.EnableSsl = true;
+                    smtpClient.Port = 587;
+                    smtpClient.Send(message);
+                }
             }
-
-            return RedirectToPage("/Index");
         }
 
-            public void OnGet()
-        {
-
-        }
     }
 }

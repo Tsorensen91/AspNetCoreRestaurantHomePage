@@ -34,7 +34,7 @@ namespace Restaurant_page.Pages
             MenuItem = await _db.MenuItems.FindAsync(id);
             if (MenuItem == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Admin/Index");
             }
             return Page();
         }
@@ -65,7 +65,7 @@ namespace Restaurant_page.Pages
             {
                 throw new Exception($"MenuItem {MenuItem.MenuID} not found!", e);
             }
-            return RedirectToPage("./OrderMenu");
+            return RedirectToPage("/Admin/Index");
         }
     }
 }

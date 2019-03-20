@@ -39,7 +39,7 @@ namespace Restaurant_page.Pages
 
             _db.MenuItems.Add(MenuItem);
             await _db.SaveChangesAsync();
-            return RedirectToPage("/OrderMenu");
+            return RedirectToPage("/Admin/Index");
         }
 
         public void OnGet()

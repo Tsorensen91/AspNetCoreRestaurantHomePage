@@ -16,6 +16,7 @@ namespace Restaurant_page.Pages
 
         private readonly UserManager<ApplicationUser> _UserManager;
         public IList<MenuItem> MenuItems { get; private set; }
+        public string Arrival = "";
 
         public OrderMenuModel(AppDbContext db, UserManager<ApplicationUser> UserManager)
         {
@@ -27,6 +28,13 @@ namespace Restaurant_page.Pages
         {
             MenuItems = _db.MenuItems.FromSql("SELECT * FROM MenuItems").ToList();
         }
+
+        public void OnGetAdded()
+        {
+            MenuItems = _db.MenuItems.FromSql("SELECT * FROM MenuItems").ToList();
+            Arrival = "added";
+        }
+
 
         public async Task<IActionResult> OnPostBuyAsync(int id)
         {
@@ -59,36 +67,10 @@ namespace Restaurant_page.Pages
                     throw new Exception($"Basket not found!", e);
                 }
             }
-            return RedirectToPage();
+            return RedirectToPage("/OrderMenu", "Added");
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
-        {
-            var itemToDelete = await _db.MenuItems.FindAsync(id);
-            if (itemToDelete != null)
-            {
-                //a check to see if item exists in any previous orders and if so delete it (this sacrifices some book-keeping but allows easy changing of menu
-                var orderItems = _db.OrderItems.FromSql("SELECT * FROM OrderItems WHERE MenuID = {0}", id).ToList();
-
-                foreach (var item in orderItems)
-                {
-                    _db.OrderItems.Remove(item);
-                    await _db.SaveChangesAsync();
-                }
-                //a check to see if item currently in any baskets and if so delete the item in those baskets.
-                var basketItems = _db.BasketItems.FromSql("SELECT * FROM BasketItems WHERE MenuID = {0}", id).ToList();
-                
-                foreach(var item in basketItems)
-                {
-                    _db.BasketItems.Remove(item);
-                }
-
-                _db.MenuItems.Remove(itemToDelete);
-                await _db.SaveChangesAsync();
-                
-            }
-            return RedirectToPage();
-        }
+        
 
     }
 

@@ -9,7 +9,7 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
 
-<h2>Checkout</h2>
+<h2 class="pagetitle">Checkout</h2>
 <div class="checkout">
     <form method="post">
         @if (Model.OrderTotal == 0)

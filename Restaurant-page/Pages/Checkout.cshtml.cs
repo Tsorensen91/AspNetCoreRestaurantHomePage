@@ -173,7 +173,7 @@ namespace Restaurant_page.Pages
 
             await _db.SaveChangesAsync();
 
-            return RedirectToPage("/PaymentRecieved");
+            return RedirectToPage("/Index", "Payment");
         }
 
 

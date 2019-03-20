@@ -45,7 +45,7 @@ namespace Restaurant_page.Pages.Account
                 var loginResult = await _signInManager.PasswordSignInAsync(LoginInput.Email, LoginInput.LoginPassword, false, lockoutOnFailure: false);
                 if (loginResult.Succeeded)
                 {
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Index", "Login");
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace Restaurant_page.Pages.Account
                     NewCustomer(RegisterInput.RegisterEmail);
                     await _db.SaveChangesAsync();
 
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Index", "Login");
                 }
                 foreach (var error in result.Errors)
                 {

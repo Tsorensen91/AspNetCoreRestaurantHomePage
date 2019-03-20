@@ -5,18 +5,55 @@
     Layout = "~/Pages/_RestaurantPagesLayout.cshtml";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Identity
+@using Restaurant_page
+@inject UserManager<ApplicationUser> UserManager
 
-
+<div class="arrival">
+    @if (Model.Arrival == "payment")
+    {
+        <p>Payment recieved for order.</p>
+    }
+    else if (Model.Arrival == "contact")
+    {
+        <p>Your message has been sent.</p>
+    }
+    else if (Model.Arrival == "logout")
+    {
+        <p>You have logged out.</p>
+    }
+    else if (Model.Arrival == "login")
+    {
+        <p class="greeting">Hello @UserManager.GetUserName(User)</p>
+    }
+</div>
 <div class="articles">
     @foreach (var menuItem in Model.MenuItems)
-     {
-     <article class="article">
-      <img src="@Url.Content("/" + menuItem.Image)" alt="@menuItem.Image" />
-      <h3><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></h3>
-      <h2>@menuItem.Price.ToString("C")</h2>
-      <p>@menuItem.Description</p>
-      </article>
-      }
-      </div>
+    {//the rootpath used for images uses backslash, this logic swaps those to forward slashes for HTML validation purposes.
+        string imagePath = "";
+
+            @foreach (var letter in menuItem.Image)
+            {
+                var letterToUse = 'a';
+
+                if (letter == '\\')
+                {
+                    letterToUse = '/';
+                }
+                else
+                {
+                    letterToUse = letter;
+                }
+                imagePath += letterToUse;
+
+            }
+            <article class="article">
+                <img src="@Url.Content("/CO5227/" + imagePath)" alt="picture of food: @imagePath" />
+                <h3><a asp-page="/Menu" asp-route-id="@menuItem.MenuID">@menuItem.Name</a></h3>
+                <h2>@menuItem.Price.ToString("C")</h2>
+                <p>@menuItem.Description</p>
+            </article>
+            }
+    </div>
 
 

@@ -1,12 +1,15 @@
 body {
     background-color: #E6E6FA;
+    height: 1600px;
 }
 
 .wrapper {
   width: 1200px;
-  height: 1400px;
+  height: 100%;
   margin: 0px auto;
   background-color: #787;
+  overflow-y: auto;
+  overflow-x:hidden;
 }
 
 header{
@@ -37,6 +40,11 @@ button {
     padding-top: 10px;
     border-radius: 5px;
     border: 2px solid;
+}
+
+.noaccess{
+    width: 60%;
+    margin: 0px 20%;
 }
 
 .buttonli{
@@ -81,11 +89,16 @@ nav li {
     color: white;
     background: rgba(20,25,20, 0.9);
     padding: 6px;
+
+}
+
+footer a {
+    margin-right: 40px;
 }
 
 .articles{
     width: 1100px;
-    margin: 50px 80px;
+    margin: 10px 80px;
 }
 
 .article {
@@ -96,6 +109,7 @@ nav li {
     padding: 20px;
     background-color: black;
     background: rgba(20,20,20, 0.3);
+    border: 2px solid black;
 }
 
 .article a {
@@ -173,8 +187,14 @@ h2 {
     text-align: center;
 }
 
-p {
+.pagetitle {
+    float: none;
+    border: 2px solid black;
+    width: 1196px;
 
+}
+
+p {
     text-align: center;
 }
 
@@ -183,6 +203,14 @@ p {
     float: left;
     margin: 0px 400px;
 }
+
+    .login form {
+        border: 2px solid black;
+        width: 400px;
+        background: rgba(20,20,20, 0.3);
+        color: white;
+        margin-bottom: 50px;
+    }
 
 .contact {
     width: 100%;
@@ -209,14 +237,41 @@ p {
 
 td, th{
     text-align: center;
-    padding: 10px;
+    height: 40px;
+    padding: 20px;
 }
 
 .additem {
     width: 100%;
     float: left;
-    margin: 0px 410px;
+    margin: 0px;
 }
+
+.additem p {
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.additem div {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+.additem input, textarea {
+    margin: 0px;
+}
+
+.additem form {
+    width: 100%;
+}
+
+    .additem button {
+        float: left;
+        margin: 50px 550px;
+    }
 
 form {
     
@@ -226,7 +281,7 @@ form {
 
 table, th, td {
     background: rgba(20,20,20, 0.3);
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 label {
@@ -235,18 +290,30 @@ label {
     margin: 10px 30px;
 }
 
+.backtomenu{
+    float: left;
+    width: 150px;
+    margin: 30px 420px;
+}
+
+.backtomenu a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 20px;
+}
+
 .loginbutton {
     float: left;
     margin: 10px;
 }
 
-.additem form div {
-    margin: 30px;
-}
-
 .checkout {
     float: left;
-    margin: 20px 470px;
+    margin: 20px 400px;
     color: white;
 }
 
@@ -263,19 +330,71 @@ label {
     margin: 20px 10px;
 }
 
+.arrival p {
+    float: left;
+    color: white;
+    background: rgba(20,20,20, 0.3);
+    font-size: 30px;
+    width: 30%;
+    margin: 0px 35%;
+    margin-bottom: 10px;
+}
+
+.admin {
+    float: left;
+    width: 100%;
+    margin: 0px 15%;
+    color: white;
+}
+
+    .admin h3 {
+        width: 250px;
+        background: rgba(20,20,20, 0.3);
+        text-align: center;
+        
+    }
+
+.admin .tblname {
+    width: 1500px;
+}
+
 .ordermenu {
+    float: left;
+    margin: 20px 15%;
+    color: white;
+}
+
+.menupage {
     float: left;
     margin: 20px 150px;
     color: white;
 }
 
+.edititem {
+    float: left;
+    margin: 20px 520px;
+    color: white;
+}
+
+.edititem button {
+    margin: 50px;
+}
+
+textarea {
+    height: 70px;
+    width: 140px;
+}
+
 .buybutton{
+    width: 100%;
     margin: 50px 80px;
 }
 
 iframe {
     float: left;
     width: 80%;
+    height: 450px;
+    border: 2px solid black;
     margin: 50px 10%;
 }
 
@@ -285,5 +404,7 @@ iframe {
 
 footer {
     float: none;
+    width: 100%;
+    text-align: center;
 }
 

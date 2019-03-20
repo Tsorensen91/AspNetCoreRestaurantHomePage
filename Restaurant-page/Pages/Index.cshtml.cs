@@ -13,6 +13,7 @@ namespace Restaurant_page.Pages
     {
         private readonly AppDbContext _db;
         public IList<MenuItem> MenuItems { get; private set; }
+        public string Arrival = "";
 
         public IndexModel(AppDbContext db)
         {
@@ -22,6 +23,30 @@ namespace Restaurant_page.Pages
         public void OnGet()
         {
             MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+        }
+
+        public void OnGetLogin()
+        {
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            Arrival = "login";
+        }
+
+        public void OnGetPayment()
+        {
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            Arrival = "payment";
+        }
+
+        public void OnGetContact()
+        {
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            Arrival = "contact";
+        }
+
+        public void OnGetLogout()
+        {
+            MenuItems = _db.MenuItems.FromSql("SELECT TOP 3 * FROM MenuItems").ToList();
+            Arrival = "logout";
         }
     }
 }

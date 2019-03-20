@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -21,14 +21,14 @@
                     <ul>
                         <li><a asp-page="/Index">Home</a></li>
                         <li><a asp-page="/OrderMenu">Menu</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-page="/Admin/Index">Admin Page</a></li>
+                        }
                         <li><a asp-page="/Contact">Contact Us</a></li>
                         @if (SignInManager.IsSignedIn(User) == false)
                         {
                             <li><a asp-page="/Account/Login">Login/Register</a></li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li><a asp-page="/AddMenuItem">Add Item to Menu</a></li>
                         }
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -61,11 +61,19 @@
             </div>
         </main>
     </div>
-        <footer>
-            <a href="http://validator.w3.org/check?uri=referer">Validate HTML</a>
-            <a href="http://jigsaw.w3.org/css-validator/check/referer">Validate CSS</a>
-            <a asp-page="./Admin">Admin</a>
-        </footer>
+    <footer>
+        <a href="http://validator.w3.org/check?uri=referer">Validate HTML</a>
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">Validate CSS</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="./Admin/Index">Admin</a>
+        }
+        <p class="w3ccss">
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!"/>
+            </a>
+        </p>
+    </footer>
         
 </body>
 </html>
